@@ -412,7 +412,7 @@ class _RescheduleDateTimeState extends ConsumerState<_RescheduleDialog> {
               child: ElevatedButton.icon(
                 onPressed: _pickDateTime,
                 icon: const Icon(Icons.edit, size: 20),
-                label: const Text('Change Date & Time'),
+                label: Text('change_date_time'.tr()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2D2D3A),
                   foregroundColor: const Color(0xFF7C3AED),
@@ -513,7 +513,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            task.isDone ? 'Completed' : 'Scheduled',
+                            task.isDone ? 'completed'.tr() : 'scheduled'.tr(),
                             style: TextStyle(
                               color: task.isDone ? const Color(0xFF10B981) : const Color(0xFF7C3AED),
                               fontSize: 14,
@@ -576,7 +576,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                         ),
                       )
                     : Text(
-                        'No note added',
+                        'no_note_added'.tr(),
                         style: TextStyle(
                           color: const Color(0xFF9CA3AF).withValues(alpha: 0.6),
                           fontSize: 15,
@@ -603,7 +603,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                         });
                       },
                       icon: const Icon(Icons.schedule, size: 18),
-                      label: const Text('Reschedule'),
+                      label: Text('reschedule'.tr()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF2D2D3A),
                         foregroundColor: const Color(0xFF7C3AED),
@@ -621,7 +621,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                         }
                       },
                       icon: const Icon(Icons.check, size: 18),
-                      label: Text(task.isDone ? 'Completed' : 'Mark Done'),
+                      label: Text(task.isDone ? 'completed'.tr() : 'mark_done'.tr()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF7C3AED),
                       ),

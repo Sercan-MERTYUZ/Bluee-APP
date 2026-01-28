@@ -133,8 +133,8 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
               const SizedBox(height: 10),
               TextField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter task title',
+                decoration: InputDecoration(
+                  hintText: 'enter_task_title'.tr(),
                   prefixIcon: Icon(Icons.edit, color: Color(0xFF7C3AED)),
                 ),
                 style: const TextStyle(color: Color(0xFFEDEDF3), fontSize: 16),
@@ -144,8 +144,8 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
               const SizedBox(height: 10),
               TextField(
                 controller: noteController,
-                decoration: const InputDecoration(
-                  hintText: 'Add optional notes',
+                decoration: InputDecoration(
+                  hintText: 'add_optional_notes'.tr(),
                   prefixIcon: Icon(Icons.note, color: Color(0xFF7C3AED)),
                 ),
                 maxLines: 3,

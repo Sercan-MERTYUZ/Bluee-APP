@@ -28,8 +28,8 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('tr')],
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('tr'),
+      fallbackLocale: const Locale('tr'),
       path: 'assets/translations',
       child: const ProviderScope(
         child: RemindersApp(),

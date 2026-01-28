@@ -15,5 +15,15 @@
   "done": "Done",
   "reschedule": "Reschedule",
   "schedule": "Schedule",
-  "scheduled_for": "Scheduled for"
+  "scheduled_for": "Scheduled for",
+  "create_first_task": "Create your first task →",
+  "change_language": "Change Language",
+  "select_language": "Select Language",
+  "enter_task_title": "Enter task title",
+  "add_optional_notes": "Add optional notes",
+  "change_date_time": "Change Date & Time",
+  "completed": "Completed",
+  "scheduled": "Scheduled",
+  "no_note_added": "No note added",
+  "mark_done": "Mark Done"
 }

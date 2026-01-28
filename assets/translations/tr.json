@@ -15,5 +15,15 @@
   "done": "Tamamlandı",
   "reschedule": "Zamanı Değiştir",
   "schedule": "Tarihle",
-  "scheduled_for": "Planlandı"
+  "scheduled_for": "Planlandı",
+  "create_first_task": "İlk görevini oluştur →",
+  "change_language": "Dil Değiştir",
+  "select_language": "Dil Seçin",
+  "enter_task_title": "Görev başlığı girin",
+  "add_optional_notes": "İsteğe bağlı not ekleyin",
+  "change_date_time": "Tarih ve Saati Değiştir",
+  "completed": "Tamamlandı",
+  "scheduled": "Planlandı",
+  "no_note_added": "Not eklenmedi",
+  "mark_done": "Tamamlandı Olarak İşaretle"
 }

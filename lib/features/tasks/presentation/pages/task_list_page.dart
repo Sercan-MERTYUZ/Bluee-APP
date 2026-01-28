@@ -20,7 +20,7 @@ class TaskListPage extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.language),
             onPressed: () => _showLanguageDialog(context),
-            tooltip: 'Change language',
+            tooltip: 'change_language'.tr(),
           ),
         ],
       ),
@@ -88,7 +88,7 @@ class TaskListPage extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Create your first task →',
+            'create_first_task'.tr(),
             style: TextStyle(
               color: const Color(0xFF7C3AED).withValues(alpha: 0.6),
               fontSize: 14,
@@ -111,7 +111,7 @@ class TaskListPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Select Language',
+                'select_language'.tr(),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 24),
