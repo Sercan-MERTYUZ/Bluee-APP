@@ -29,6 +29,16 @@ class TaskRepository {
     await box.delete(taskId);
   }
 
+  Future<void> deleteTaskSafe(Task task) async {
+    final box = HiveBoxes.tasksBox;
+    try {
+      await NotificationService.instance.cancel(task.notificationId);
+    } catch (e) {
+      // Ignore notification cancel error
+    }
+    await box.delete(task.id);
+  }
+
   Future<void> scheduleNotification(Task task, DateTime notificationAt) async {
     final notificationId = task.id.hashCode.abs();
     await NotificationService.instance.schedule(

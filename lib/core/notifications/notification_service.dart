@@ -50,6 +50,14 @@ class NotificationService {
           sound: true,
         );
 
+    // Request Android permissions
+    final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+        _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+
+    await androidImplementation?.requestNotificationsPermission();
+    await androidImplementation?.requestExactAlarmsPermission();
+
     // Initialize timezone with UTC as default
     _localTimezone = tz.getLocation('UTC');
     tz.setLocalLocation(_localTimezone);
