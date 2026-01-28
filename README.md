@@ -43,9 +43,22 @@ lib/
 
 ### Prerequisites
 
-- Flutter SDK (3.0.0 or higher)
-- Dart SDK
-- Android Studio (for Android builds)
+Before you begin, ensure you have the following installed:
+
+1. **Flutter SDK** (3.0.0 or higher)
+   - Download: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+   - Run `flutter doctor` to verify installation
+
+2. **Dart SDK** (included with Flutter)
+
+3. **Android Studio** (for Android builds)
+   - Download: [https://developer.android.com/studio](https://developer.android.com/studio)
+   - Install Android SDK via Android Studio
+   - Set up an Android emulator or connect a physical device
+
+4. **Xcode** (for iOS/macOS builds - Mac only)
+   - Download from App Store
+   - Run `xcode-select --install` for command line tools
 
 ### Installation
 
@@ -137,9 +150,22 @@ lib/
 
 ### Gereksinimler
 
-- Flutter SDK (3.0.0 veya üzeri)
-- Dart SDK
-- Android Studio (Android derlemeleri için)
+Başlamadan önce aşağıdakilerin yüklü olduğundan emin olun:
+
+1. **Flutter SDK** (3.0.0 veya üzeri)
+   - İndirin: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+   - Kurulumu doğrulamak için `flutter doctor` komutunu çalıştırın
+
+2. **Dart SDK** (Flutter ile birlikte gelir)
+
+3. **Android Studio** (Android derlemeleri için)
+   - İndirin: [https://developer.android.com/studio](https://developer.android.com/studio)
+   - Android Studio üzerinden Android SDK'yı kurun
+   - Bir Android emülatör kurun veya fiziksel cihaz bağlayın
+
+4. **Xcode** (iOS/macOS derlemeleri için - Sadece Mac)
+   - App Store'dan indirin
+   - Komut satırı araçları için `xcode-select --install` çalıştırın
 
 ### Kurulum
 
