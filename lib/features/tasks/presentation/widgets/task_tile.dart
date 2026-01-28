@@ -43,6 +43,7 @@ class TaskTile extends ConsumerWidget {
                   value: task.isDone,
                   onChanged: (value) async {
                     await ref.read(tasksProvider.notifier).markDone(task, value ?? false);
+                    ref.invalidate(tasksProvider);
                   },
                 ),
                 const SizedBox(width: 12),
@@ -91,6 +92,7 @@ class TaskTile extends ConsumerWidget {
                     icon: const Icon(Icons.check_circle_outline, color: Color(0xFF7C3AED)),
                     onPressed: () async {
                       await ref.read(tasksProvider.notifier).markDone(task, true);
+                      ref.invalidate(tasksProvider);
                     },
                     tooltip: 'done'.tr(),
                     constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
@@ -240,6 +242,7 @@ class TaskTile extends ConsumerWidget {
     if (confirm ?? false) {
       if (context.mounted) {
         await ref.read(tasksProvider.notifier).deleteTask(task);
+        ref.invalidate(tasksProvider);
       }
     }
   }
@@ -281,6 +284,7 @@ class _RescheduleDateTimeState extends ConsumerState<_RescheduleDialog> {
         ),
       );
     } else {
+      ref.invalidate(tasksProvider);
       Navigator.pop(context);
     }
   }
@@ -618,6 +622,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                         Navigator.pop(context);
                         if (!task.isDone) {
                           ref.read(tasksProvider.notifier).markDone(task, true);
+                          ref.invalidate(tasksProvider);
                         }
                       },
                       icon: const Icon(Icons.check, size: 18),
@@ -693,6 +698,7 @@ class _TaskDetailsBottomSheet extends ConsumerWidget {
                                         child: ElevatedButton(
                                           onPressed: () {
                                             ref.read(tasksProvider.notifier).deleteTask(task);
+                                            ref.invalidate(tasksProvider);
                                             Navigator.pop(context);
                                           },
                                           style: ElevatedButton.styleFrom(

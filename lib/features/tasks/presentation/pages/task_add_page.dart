@@ -93,6 +93,7 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
           SnackBar(content: Text(error.tr())),
         );
       } else {
+        ref.invalidate(tasksProvider);
         Navigator.of(context).pop();
       }
     }
