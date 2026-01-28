@@ -5,6 +5,7 @@ Bluee is a modern, efficient, and user-friendly reminder application built with 
 ## 🌟 Features
 
 - **Task Management**: Create, read, and delete tasks easily.
+- **Search Tasks**: Quickly find tasks by title or note.
 - **Local Notifications**: Scheduled notifications to remind you of your tasks on time.
 - **Offline Storage**: Uses **Hive** for fast and secure local data storage.
 - **State Management**: Built with **Riverpod** for a robust and scalable architecture.
@@ -112,6 +113,7 @@ Bluee, **Flutter** ile geliştirilmiş modern, etkili ve kullanıcı dostu bir h
 ## 🌟 Özellikler
 
 - **Görev Yönetimi**: Görevleri kolayca oluşturun, okuyun ve silin.
+- **Görev Arama**: Başlık veya nota göre görevleri hızlıca bulun.
 - **Yerel Bildirimler**: Görevlerinizi zamanında hatırlatmak için zamanlanmış bildirimler.
 - **Çevrimdışı Depolama**: Hızlı ve güvenli yerel veri depolaması için **Hive** kullanır.
 - **Durum Yönetimi (State Management)**: Sağlam ve ölçeklenebilir bir mimari için **Riverpod** ile geliştirilmiştir.

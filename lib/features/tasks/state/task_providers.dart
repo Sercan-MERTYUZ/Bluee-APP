@@ -24,8 +24,8 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     // Calculate notification time: 30 minutes before task time
     final notificationAt = scheduledAt.subtract(const Duration(minutes: 30));
 
-    // Validate: notificationAt must be in the future (cannot be in past or now)
-    if (notificationAt.isBefore(DateTime.now()) || notificationAt.isAtSameMomentAs(DateTime.now())) {
+    // Validate: scheduledAt must be in the future
+    if (scheduledAt.isBefore(DateTime.now())) {
       return 'invalid_time'; // localization key
     }
 
@@ -43,12 +43,14 @@ class TaskNotifier extends StateNotifier<List<Task>> {
 
     await repository.addTask(task);
     
-    // Schedule notification for 30 minutes before task time
-    try {
-      await repository.scheduleNotification(task, notificationAt);
-    } catch (e) {
-      debugPrint('Notification scheduling failed: $e');
-      // Continue execution even if notification fails
+    // Schedule notification only if notification time is in the future
+    if (notificationAt.isAfter(DateTime.now())) {
+      try {
+        await repository.scheduleNotification(task, notificationAt);
+      } catch (e) {
+        debugPrint('Notification scheduling failed: $e');
+        // Continue execution even if notification fails
+      }
     }
 
     state = [...state, task];
@@ -104,8 +106,8 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     // Calculate notification time: 30 minutes before new task time
     final newNotificationAt = newScheduledAt.subtract(const Duration(minutes: 30));
 
-    // Validate: newNotificationAt must be in the future
-    if (newNotificationAt.isBefore(DateTime.now()) || newNotificationAt.isAtSameMomentAs(DateTime.now())) {
+    // Validate: newScheduledAt must be in the future
+    if (newScheduledAt.isBefore(DateTime.now())) {
       return 'invalid_time';
     }
 
@@ -123,11 +125,13 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     final updatedTask = task.copyWith(scheduledAt: newScheduledAt);
     await repository.updateTask(updatedTask);
 
-    // 3. Schedule new notification (ignore error)
-    try {
-      await repository.scheduleNotification(updatedTask, newNotificationAt);
-    } catch (e) {
-      debugPrint('Schedule notification failed: $e');
+    // 3. Schedule new notification (ignore error) if time is valid
+    if (newNotificationAt.isAfter(DateTime.now())) {
+      try {
+        await repository.scheduleNotification(updatedTask, newNotificationAt);
+      } catch (e) {
+        debugPrint('Schedule notification failed: $e');
+      }
     }
     
     state = [
