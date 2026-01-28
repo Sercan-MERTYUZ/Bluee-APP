@@ -6,6 +6,7 @@
   "tasks": "Görevlerim",
   "add_task": "Görev Ekle",
   "task_details": "Görev Detayları",
+  "task_reminder_body": "30 dakika içinde başlayacak",
   "title": "Başlık",
   "note_optional": "Not (opsiyonel)",
   "pick_date": "Tarihi ve Saati Seç",

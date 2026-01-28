@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import '../../../core/notifications/notification_service.dart';
 import '../../../core/storage/hive_boxes.dart';
 import 'task_model.dart';
@@ -41,10 +42,12 @@ class TaskRepository {
 
   Future<void> scheduleNotification(Task task, DateTime notificationAt) async {
     final notificationId = task.id.hashCode.abs();
+    final body = 'task_reminder_body'.tr() + (task.note != null && task.note!.isNotEmpty ? '\n${task.note}' : '');
+    
     await NotificationService.instance.schedule(
       id: notificationId,
       title: task.title,
-      body: task.note ?? 'Reminder',
+      body: body,
       scheduledDate: notificationAt, // Fire 30 minutes before task time
     );
   }

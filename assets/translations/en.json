@@ -6,6 +6,7 @@
   "tasks": "My Tasks",
   "add_task": "Add Task",
   "task_details": "Task Details",
+  "task_reminder_body": "Starts in 30 minutes",
   "title": "Title",
   "note_optional": "Note (optional)",
   "pick_date": "Pick Date & Time",
