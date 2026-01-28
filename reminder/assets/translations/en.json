@@ -1,0 +1,19 @@
+{
+  "app_title": "Reminder",
+  "tasks": "My Tasks",
+  "add_task": "Add Task",
+  "task_details": "Task Details",
+  "title": "Title",
+  "note_optional": "Note (optional)",
+  "pick_date": "Pick Date & Time",
+  "pick_time": "Pick Time",
+  "save": "Save",
+  "cancel": "Cancel",
+  "invalid_time": "Scheduled time must be in the future",
+  "empty": "No tasks yet",
+  "delete": "Delete",
+  "done": "Done",
+  "reschedule": "Reschedule",
+  "schedule": "Schedule",
+  "scheduled_for": "Scheduled for"
+}

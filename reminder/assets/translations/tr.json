@@ -1,0 +1,19 @@
+{
+  "app_title": "Hatırlatıcı",
+  "tasks": "Görevlerim",
+  "add_task": "Görev Ekle",
+  "task_details": "Görev Detayları",
+  "title": "Başlık",
+  "note_optional": "Not (opsiyonel)",
+  "pick_date": "Tarihi ve Saati Seç",
+  "pick_time": "Saati Seç",
+  "save": "Kaydet",
+  "cancel": "İptal",
+  "invalid_time": "Planlanan zaman gelecekte olmalıdır",
+  "empty": "Henüz görev yok",
+  "delete": "Sil",
+  "done": "Tamamlandı",
+  "reschedule": "Zamanı Değiştir",
+  "schedule": "Tarihle",
+  "scheduled_for": "Planlandı"
+}
