@@ -1,120 +1,80 @@
-# Reminder App
+# Bluee - Smart Reminder App
 
-A Flutter MVP reminder app with local notifications, persistent storage with Hive, and localization support (English & Turkish).
+Bluee is a modern, efficient, and user-friendly reminder application built with **Flutter**. It allows users to manage tasks effectively with local notifications, persistent storage, and multi-language support.
 
-## Features
+## 🌟 Features
 
-- ✅ Create tasks with title, optional notes, and date/time
-- ✅ List all tasks sorted by scheduled time
-- ✅ Mark tasks as done
-- ✅ Delete tasks
-- ✅ Local notifications at scheduled time
-- ✅ Persistent storage with Hive
-- ✅ Localization (English & Turkish)
-- ✅ Language toggle in AppBar
+- **Task Management**: Create, read, and delete tasks easily.
+- **Local Notifications**: Scheduled notifications to remind you of your tasks on time.
+- **Offline Storage**: Uses **Hive** for fast and secure local data storage.
+- **State Management**: Built with **Riverpod** for a robust and scalable architecture.
+- **Multi-language Support**: Fully localized in **English** and **Turkish** using `easy_localization`.
+- **Cross-Platform**: Runs smoothly on both iOS and Android.
 
-## Project Structure
+## 🛠 Tech Stack
+
+- **Framework**: [Flutter](https://flutter.dev/)
+- **State Management**: [Riverpod](https://riverpod.dev/)
+- **Local Storage**: [Hive](https://docs.hivedb.dev/)
+- **Notifications**: [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+- **Localization**: [easy_localization](https://pub.dev/packages/easy_localization)
+- **Date Formatting**: [intl](https://pub.dev/packages/intl)
+
+## 📂 Project Structure
+
+The project follows a feature-first, clean architecture approach:
 
 ```
 lib/
-  main.dart                          # Entry point
-  app.dart                           # App configuration
-  core/
-    notifications/
-      notification_service.dart      # Local notifications management
-    storage/
-      hive_boxes.dart               # Hive box access
-  features/
-    tasks/
-      data/
-        task_model.dart             # Task Hive model
-        task_repository.dart        # Repository pattern
-      state/
-        task_providers.dart         # Riverpod state management
-      presentation/
-        pages/
-          task_list_page.dart       # Main task list screen
-          task_add_page.dart        # Add new task screen
-        widgets/
-          task_tile.dart            # Task item widget
-
-assets/translations/
-  en.json                           # English localization strings
-  tr.json                           # Turkish localization strings
+├── core/
+│   ├── notifications/   # Notification logic and configuration
+│   └── storage/        # Database (Hive) setup
+├── features/
+│   └── tasks/          # Task feature module
+│       ├── data/       # Models, Hive Adapters, Repositories
+│       ├── presentation/ # UI (Pages, Widgets)
+│       └── state/      # Riverpod Providers
+├── assets/
+│   └── translations/   # JSON files for EN and TR support
+└── main.dart           # App entry point and initialization
 ```
 
-## Tech Stack
-
-- **Flutter**: UI framework
-- **flutter_riverpod**: State management
-- **hive & hive_flutter**: Local database
-- **easy_localization**: Multi-language support
-- **flutter_local_notifications**: Push notifications
-- **timezone & flutter_timezone**: Timezone handling
-- **uuid**: Unique ID generation
-- **intl**: Date formatting
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (stable channel)
-- iOS: Xcode
-- Android: Android Studio, Android SDK
+- Flutter SDK (3.0.0 or higher)
+- Dart SDK
 
 ### Installation
 
-1. Clone and navigate to project:
-```bash
-cd reminder
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Sercan-MERTYUZ/Bluee-APP.git
+   cd Bluee-APP/reminder
+   ```
 
-2. Install dependencies:
-```bash
-flutter pub get
-```
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
 
-3. Generate Hive adapters:
-```bash
-flutter pub run build_runner build --delete-conflicting-outputs
-```
+3. **Run the Code Generator (for Hive & Riverpod)**
+   ```bash
+   dart run build_runner build --delete-conflicting-outputs
+   ```
 
-4. Run the app:
-```bash
-flutter run
-```
+4. **Run the App**
+   ```bash
+   flutter run
+   ```
 
-## Usage
+## 🌍 Localization
 
-### Creating a Task
-1. Tap the FAB (+) button
-2. Enter task title
-3. Optionally add a note
-4. Select date and time
-5. Tap Save
+The app automatically detects the system language. Supported locales:
+- 🇺🇸 English (`en`) - Default
+- 🇹🇷 Turkish (`tr`)
 
-### Managing Tasks
-- **Mark as Done**: Tap the checkbox to mark a task complete
-- **Delete Task**: Tap the delete icon (notification will be cancelled)
-- **Change Language**: Tap the language icon in AppBar
+## 🤝 Contributing
 
-## Validation
-
-- Scheduled time must be in the future
-- Title field is required
-- Date/time selection is required
-
-## Notifications
-
-Local notifications are scheduled for each task at the specified time. When you:
-- **Create a task**: Notification is scheduled
-- **Mark as done**: Notification is cancelled
-- **Delete a task**: Notification is cancelled
-
-## Localization
-
-Supports English (en) and Turkish (tr). Language changes are applied immediately and persist in the app session.
-
----
-
-**MVP Version**: No repeating reminders, cloud sync, or authentication features.
+Contributions are welcome! Please feel free to submit a Pull Request.
