@@ -1,5 +1,8 @@
 {
   "app_title": "Reminder",
+  "search": "Search",
+  "search_hint": "Search tasks...",
+  "search_empty": "No tasks found",
   "tasks": "My Tasks",
   "add_task": "Add Task",
   "task_details": "Task Details",

@@ -1,5 +1,8 @@
 {
   "app_title": "Hatırlatıcı",
+  "search": "Ara",
+  "search_hint": "Görevlerde ara...",
+  "search_empty": "Sonuç bulunamadı",
   "tasks": "Görevlerim",
   "add_task": "Görev Ekle",
   "task_details": "Görev Detayları",
