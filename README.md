@@ -45,6 +45,7 @@ lib/
 
 - Flutter SDK (3.0.0 or higher)
 - Dart SDK
+- Android Studio (for Android builds)
 
 ### Installation
 
@@ -69,11 +70,21 @@ lib/
    flutter run
    ```
 
+### Build APK (Android)
+
+To build a release APK for Android:
+
+```bash
+flutter build apk --release
+```
+
+The APK will be generated at: `build/app/outputs/flutter-apk/app-release.apk`
+
 ## 🌍 Localization
 
-The app automatically detects the system language. Supported locales:
-- �� Turkish (`tr`) - Default
-- �� English (`en`)
+The app uses Turkish as the default language. Supported locales:
+- 🇹🇷 Turkish (`tr`) - Default
+- 🇺🇸 English (`en`)
 
 ## 🤝 Contributing
 
@@ -128,6 +139,7 @@ lib/
 
 - Flutter SDK (3.0.0 veya üzeri)
 - Dart SDK
+- Android Studio (Android derlemeleri için)
 
 ### Kurulum
 
@@ -152,11 +164,21 @@ lib/
    flutter run
    ```
 
+### APK Oluşturma (Android)
+
+Android için release APK oluşturmak için:
+
+```bash
+flutter build apk --release
+```
+
+APK dosyası şu konumda oluşturulacak: `build/app/outputs/flutter-apk/app-release.apk`
+
 ## 🌍 Dil Desteği
 
-Uygulama, sistem dilini otomatik olarak algılar. Desteklenen diller:
-- �� Türkçe (`tr`) - Varsayılan
-- �� İngilizce (`en`)
+Uygulama varsayılan olarak Türkçe dilinde açılır. Desteklenen diller:
+- 🇹🇷 Türkçe (`tr`) - Varsayılan
+- 🇺🇸 İngilizce (`en`)
 
 ## 🤝 Katkıda Bulunma
 
