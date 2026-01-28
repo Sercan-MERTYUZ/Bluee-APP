@@ -9,7 +9,7 @@ Bluee is a modern, efficient, and user-friendly reminder application built with 
 - **Offline Storage**: Uses **Hive** for fast and secure local data storage.
 - **State Management**: Built with **Riverpod** for a robust and scalable architecture.
 - **Multi-language Support**: Fully localized in **English** and **Turkish** using `easy_localization`.
-- **Cross-Platform**: Runs smoothly on both iOS and Android.
+- **Cross-Platform**: Runs smoothly on iOS, Android, macOS, and Web.
 
 ## 🛠 Tech Stack
 
@@ -72,8 +72,8 @@ lib/
 ## 🌍 Localization
 
 The app automatically detects the system language. Supported locales:
-- 🇺🇸 English (`en`) - Default
-- 🇹🇷 Turkish (`tr`)
+- �� Turkish (`tr`) - Default
+- �� English (`en`)
 
 ## 🤝 Contributing
 
@@ -92,7 +92,7 @@ Bluee, **Flutter** ile geliştirilmiş modern, etkili ve kullanıcı dostu bir h
 - **Çevrimdışı Depolama**: Hızlı ve güvenli yerel veri depolaması için **Hive** kullanır.
 - **Durum Yönetimi (State Management)**: Sağlam ve ölçeklenebilir bir mimari için **Riverpod** ile geliştirilmiştir.
 - **Çoklu Dil Desteği**: `easy_localization` kullanılarak **İngilizce** ve **Türkçe** dillerini tam destekler.
-- **Çapraz Platform**: Hem iOS hem de Android'de sorunsuz çalışır.
+- **Çapraz Platform**: iOS, Android, macOS ve Web'de sorunsuz çalışır.
 
 ## 🛠 Kullanılan Teknolojiler
 
@@ -155,8 +155,8 @@ lib/
 ## 🌍 Dil Desteği
 
 Uygulama, sistem dilini otomatik olarak algılar. Desteklenen diller:
-- 🇺🇸 İngilizce (`en`) - Varsayılan
-- 🇹🇷 Türkçe (`tr`)
+- �� Türkçe (`tr`) - Varsayılan
+- �� İngilizce (`en`)
 
 ## 🤝 Katkıda Bulunma
 
