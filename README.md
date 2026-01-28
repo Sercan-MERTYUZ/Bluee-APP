@@ -51,7 +51,7 @@ lib/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Sercan-MERTYUZ/Bluee-APP.git
-   cd Bluee-APP/reminder
+   cd Bluee-APP
    ```
 
 2. **Install dependencies**
@@ -78,3 +78,86 @@ The app automatically detects the system language. Supported locales:
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+# 🇹🇷 Bluee - Akıllı Hatırlatıcı Uygulaması
+
+Bluee, **Flutter** ile geliştirilmiş modern, etkili ve kullanıcı dostu bir hatırlatıcı uygulamasıdır. Yerel bildirimler, kalıcı depolama ve çoklu dil desteği ile görevlerinizi etkili bir şekilde yönetmenizi sağlar.
+
+## 🌟 Özellikler
+
+- **Görev Yönetimi**: Görevleri kolayca oluşturun, okuyun ve silin.
+- **Yerel Bildirimler**: Görevlerinizi zamanında hatırlatmak için zamanlanmış bildirimler.
+- **Çevrimdışı Depolama**: Hızlı ve güvenli yerel veri depolaması için **Hive** kullanır.
+- **Durum Yönetimi (State Management)**: Sağlam ve ölçeklenebilir bir mimari için **Riverpod** ile geliştirilmiştir.
+- **Çoklu Dil Desteği**: `easy_localization` kullanılarak **İngilizce** ve **Türkçe** dillerini tam destekler.
+- **Çapraz Platform**: Hem iOS hem de Android'de sorunsuz çalışır.
+
+## 🛠 Kullanılan Teknolojiler
+
+- **Framework**: [Flutter](https://flutter.dev/)
+- **Durum Yönetimi**: [Riverpod](https://riverpod.dev/)
+- **Yerel Depolama**: [Hive](https://docs.hivedb.dev/)
+- **Bildirimler**: [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+- **Yerelleştirme (Dil)**: [easy_localization](https://pub.dev/packages/easy_localization)
+- **Tarih Formatlama**: [intl](https://pub.dev/packages/intl)
+
+## 📂 Proje Yapısı
+
+Proje, özellik öncelikli (feature-first) temiz mimari yaklaşımını izler:
+
+```
+lib/
+├── core/
+│   ├── notifications/   # Bildirim mantığı ve konfigürasyonu
+│   └── storage/        # Veritabanı (Hive) kurulumu
+├── features/
+│   └── tasks/          # Görev özelliği modülü
+│       ├── data/       # Modeller, Hive Adaptörleri, Depolar (Repositories)
+│       ├── presentation/ # Arayüz (Sayfalar, Widget'lar)
+│       └── state/      # Riverpod Sağlayıcıları (Providers)
+├── assets/
+│   └── translations/   # EN ve TR desteği için JSON dosyaları
+└── main.dart           # Uygulama giriş noktası ve başlatma
+```
+
+## 🚀 Başlarken
+
+### Gereksinimler
+
+- Flutter SDK (3.0.0 veya üzeri)
+- Dart SDK
+
+### Kurulum
+
+1. **Depoyu klonlayın**
+   ```bash
+   git clone https://github.com/Sercan-MERTYUZ/Bluee-APP.git
+   cd Bluee-APP
+   ```
+
+2. **Bağımlılıkları yükleyin**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Kod Üreticisini Çalıştırın (Hive & Riverpod için)**
+   ```bash
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+4. **Uygulamayı Çalıştırın**
+   ```bash
+   flutter run
+   ```
+
+## 🌍 Dil Desteği
+
+Uygulama, sistem dilini otomatik olarak algılar. Desteklenen diller:
+- 🇺🇸 İngilizce (`en`) - Varsayılan
+- 🇹🇷 Türkçe (`tr`)
+
+## 🤝 Katkıda Bulunma
+
+Katkılarınız memnuniyetle karşılanır! Lütfen bir Pull Request göndermekten çekinmeyin.
