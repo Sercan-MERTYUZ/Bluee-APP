@@ -1,3 +1,5 @@
+rootProject.name = "bluee_android"
+
 pluginManagement {
     val flutterSdkPath =
         run {
