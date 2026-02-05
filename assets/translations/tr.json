@@ -29,5 +29,17 @@
   "completed": "Tamamlandı",
   "scheduled": "Planlandı",
   "no_note_added": "Not eklenmedi",
-  "mark_done": "Tamamlandı Olarak İşaretle"
+  "mark_done": "Tamamlandı Olarak İşaretle",
+  "notes": "Notlar",
+  "no_notes": "Henüz not eklenmedi",
+  "add_note": "Not Ekle",
+  "note_content": "Not içeriği...",
+  "person_topic": "Kişi / Konu (Örn: Ahmet Bey)",
+  "filter_notes": "Notları Filtrele",
+  "filter_by_person": "Kişiye/Konuya göre ara",
+  "filter_by_date": "Tarihe göre filtrele",
+  "apply": "Uygula",
+  "select_person": "Kişi Seç",
+  "no_persons_yet": "Henüz kişi eklenmedi",
+  "filter_by_date_range": "Tarih aralığı seçin"
 }

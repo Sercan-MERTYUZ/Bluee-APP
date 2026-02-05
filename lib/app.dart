@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import 'features/tasks/presentation/pages/task_list_page.dart';
+import 'features/home/presentation/pages/home_page.dart';
 
 class RemindersApp extends StatelessWidget {
   const RemindersApp({super.key});
@@ -95,7 +95,7 @@ class RemindersApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: const TaskListPage(),
+      home: const HomePage(),
     );
   }
 }
