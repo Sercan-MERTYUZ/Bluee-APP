@@ -290,11 +290,13 @@ class _RescheduleDateTimeState extends ConsumerState<_RescheduleDialog> {
   }
 
   Future<void> _pickDateTime() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year, now.month, now.day);
     final date = await showDatePicker(
       context: context,
-      initialDate: selectedDateTime,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
+      initialDate: selectedDateTime.isBefore(firstDate) ? firstDate : selectedDateTime,
+      firstDate: firstDate,
+      lastDate: now.add(const Duration(days: 365)),
     );
 
     if (date != null && mounted) {

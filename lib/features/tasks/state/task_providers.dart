@@ -24,8 +24,8 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     // Calculate notification time: 30 minutes before task time
     final notificationAt = scheduledAt.subtract(const Duration(minutes: 30));
 
-    // Validate: scheduledAt must be in the future
-    if (scheduledAt.isBefore(DateTime.now())) {
+    // Validate: scheduledAt must be in the future (allow 1 minute buffer for "just now")
+    if (scheduledAt.isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
       return 'invalid_time'; // localization key
     }
 
@@ -106,8 +106,8 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     // Calculate notification time: 30 minutes before new task time
     final newNotificationAt = newScheduledAt.subtract(const Duration(minutes: 30));
 
-    // Validate: newScheduledAt must be in the future
-    if (newScheduledAt.isBefore(DateTime.now())) {
+    // Validate: newScheduledAt must be in the future (allow 1 minute buffer)
+    if (newScheduledAt.isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
       return 'invalid_time';
     }
 

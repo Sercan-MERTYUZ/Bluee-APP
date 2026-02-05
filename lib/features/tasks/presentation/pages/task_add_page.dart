@@ -31,11 +31,13 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
   }
 
   Future<void> _pickDate() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year, now.month, now.day);
     final date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now.add(const Duration(days: 365)),
     );
 
     if (date != null) {
