@@ -6,6 +6,8 @@ Bluee is a modern, efficient, and user-friendly reminder application built with 
 
 - **Task Management**: Create, read, and delete tasks easily.
 - **Search Tasks**: Quickly find tasks by title or note.
+- **Note Taking**: Create notes with rich details including person/topic tags.
+- **Advanced Filtering**: Filter notes by person (using checkboxes) and date range.
 - **Local Notifications**: Scheduled notifications to remind you of your tasks on time.
 - **Offline Storage**: Uses **Hive** for fast and secure local data storage.
 - **State Management**: Built with **Riverpod** for a robust and scalable architecture.
@@ -35,6 +37,9 @@ lib/
 │       ├── data/       # Models, Hive Adapters, Repositories
 │       ├── presentation/ # UI (Pages, Widgets)
 │       └── state/      # Riverpod Providers
+│   └── notes/          # Notes feature module
+│       ├── data/       # Note Model and Adapter
+│       └── presentation/ # UI (Notes Page, Dialogs)
 ├── assets/
 │   └── translations/   # JSON files for EN and TR support
 └── main.dart           # App entry point and initialization
@@ -94,6 +99,10 @@ flutter build apk --release
 
 The APK will be generated at: `build/app/outputs/flutter-apk/app-release.apk`
 
+Pre-built APKs are available in the `APKs/` directory:
+- `APKs/Bluee.apk` - Initial version
+- `APKs/Bluee2.apk` - Version with Notes feature
+
 ## 🌍 Localization
 
 The app uses Turkish as the default language. Supported locales:
@@ -114,6 +123,8 @@ Bluee, **Flutter** ile geliştirilmiş modern, etkili ve kullanıcı dostu bir h
 
 - **Görev Yönetimi**: Görevleri kolayca oluşturun, okuyun ve silin.
 - **Görev Arama**: Başlık veya nota göre görevleri hızlıca bulun.
+- **Not Alma**: Kişi/konu etiketleri ile detaylı notlar oluşturun.
+- **Gelişmiş Filtreleme**: Notları kişiye (checkbox ile) ve tarih aralığına göre filtreleyin.
 - **Yerel Bildirimler**: Görevlerinizi zamanında hatırlatmak için zamanlanmış bildirimler.
 - **Çevrimdışı Depolama**: Hızlı ve güvenli yerel veri depolaması için **Hive** kullanır.
 - **Durum Yönetimi (State Management)**: Sağlam ve ölçeklenebilir bir mimari için **Riverpod** ile geliştirilmiştir.
@@ -143,6 +154,9 @@ lib/
 │       ├── data/       # Modeller, Hive Adaptörleri, Depolar (Repositories)
 │       ├── presentation/ # Arayüz (Sayfalar, Widget'lar)
 │       └── state/      # Riverpod Sağlayıcıları (Providers)
+│   └── notes/          # Not özelliği modülü
+│       ├── data/       # Not Modeli ve Adaptörü
+│       └── presentation/ # Arayüz (Notlar Sayfası, Diyaloglar)
 ├── assets/
 │   └── translations/   # EN ve TR desteği için JSON dosyaları
 └── main.dart           # Uygulama giriş noktası ve başlatma
@@ -201,6 +215,10 @@ flutter build apk --release
 ```
 
 APK dosyası şu konumda oluşturulacak: `build/app/outputs/flutter-apk/app-release.apk`
+
+Hazır APK dosyaları `APKs/` klasöründe mevcuttur:
+- `APKs/Bluee.apk` - İlk sürüm
+- `APKs/Bluee2.apk` - Notlar özelliğini içeren sürüm
 
 ## 🌍 Dil Desteği
 
