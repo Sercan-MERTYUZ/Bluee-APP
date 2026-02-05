@@ -138,7 +138,7 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
                 controller: titleController,
                 decoration: InputDecoration(
                   hintText: 'enter_task_title'.tr(),
-                  prefixIcon: Icon(Icons.edit, color: Color(0xFF7C3AED)),
+                  prefixIcon: const Icon(Icons.edit, color: Color(0xFF7C3AED)),
                 ),
                 style: const TextStyle(color: Color(0xFFEDEDF3), fontSize: 16),
               ),
@@ -149,7 +149,7 @@ class _TaskAddPageState extends ConsumerState<TaskAddPage> {
                 controller: noteController,
                 decoration: InputDecoration(
                   hintText: 'add_optional_notes'.tr(),
-                  prefixIcon: Icon(Icons.note, color: Color(0xFF7C3AED)),
+                  prefixIcon: const Icon(Icons.note, color: Color(0xFF7C3AED)),
                 ),
                 maxLines: 3,
                 style: const TextStyle(color: Color(0xFFEDEDF3), fontSize: 16),
