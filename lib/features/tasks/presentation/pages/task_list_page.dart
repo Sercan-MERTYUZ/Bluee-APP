@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../../data/task_model.dart';
 import '../../state/task_providers.dart';
 import '../widgets/task_tile.dart';
 import 'task_add_page.dart';
@@ -88,16 +89,7 @@ class _TaskListPageState extends ConsumerState<TaskListPage> {
             Expanded(
               child: tasks.isEmpty
                   ? _buildEmptyState(context, isSearch: _searchQuery.isNotEmpty)
-                  : ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      itemCount: tasks.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: TaskTile(task: tasks[index]),
-                        );
-                      },
-                    ),
+                  : _buildTaskSections(tasks),
             ),
           ],
         ),
@@ -110,6 +102,79 @@ class _TaskListPageState extends ConsumerState<TaskListPage> {
         },
         child: const Icon(Icons.add, size: 28),
       ),
+    );
+  }
+
+  Widget _buildTaskSections(List<Task> tasks) {
+    final pendingTasks = tasks.where((task) => !task.isDone).toList();
+    final completedTasks = tasks.where((task) => task.isDone).toList();
+
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      children: [
+        // Pending tasks
+        ...pendingTasks.map((task) => Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: TaskTile(task: task),
+        )),
+        // Completed tasks section
+        if (completedTasks.isNotEmpty) ...[
+          Padding(
+            padding: EdgeInsets.only(
+              top: pendingTasks.isNotEmpty ? 8 : 0,
+              bottom: 12,
+            ),
+            child: _buildSectionHeader('completed_tasks'.tr(), completedTasks.length),
+          ),
+          ...completedTasks.map((task) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Opacity(
+              opacity: 0.6,
+              child: TaskTile(task: task),
+            ),
+          )),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildSectionHeader(String title, int count) {
+    return Row(
+      children: [
+        Container(
+          width: 4,
+          height: 20,
+          decoration: BoxDecoration(
+            color: const Color(0xFF7C3AED),
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          title,
+          style: const TextStyle(
+            color: Color(0xFFEDEDF3),
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: const Color(0xFF7C3AED).withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            '$count',
+            style: const TextStyle(
+              color: Color(0xFF7C3AED),
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

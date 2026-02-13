@@ -29,5 +29,6 @@
   "completed": "Completed",
   "scheduled": "Scheduled",
   "no_note_added": "No note added",
-  "mark_done": "Mark Done"
+  "mark_done": "Mark Done",
+  "completed_tasks": "Completed"
 }

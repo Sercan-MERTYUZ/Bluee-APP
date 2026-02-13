@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'features/home/presentation/pages/home_page.dart';
@@ -8,8 +9,14 @@ class RemindersApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF0B0B10),
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     return MaterialApp(
       title: 'Reminder',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,

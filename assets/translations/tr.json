@@ -41,5 +41,6 @@
   "apply": "Uygula",
   "select_person": "Kişi Seç",
   "no_persons_yet": "Henüz kişi eklenmedi",
-  "filter_by_date_range": "Tarih aralığı seçin"
+  "filter_by_date_range": "Tarih aralığı seçin",
+  "completed_tasks": "Yapılanlar"
 }
