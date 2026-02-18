@@ -25,7 +25,7 @@ class TaskRepository {
     final box = HiveBoxes.tasksBox;
     final task = box.get(taskId);
     if (task != null) {
-      await NotificationService.instance.cancel(task.notificationId);
+      await cancelReminders(task.notificationId);
     }
     await box.delete(taskId);
   }
@@ -33,37 +33,57 @@ class TaskRepository {
   Future<void> deleteTaskSafe(Task task) async {
     final box = HiveBoxes.tasksBox;
     try {
-      await NotificationService.instance.cancel(task.notificationId);
+      await cancelReminders(task.notificationId);
     } catch (e) {
       // Ignore notification cancel error
     }
     await box.delete(task.id);
   }
 
-  Future<void> scheduleNotification(Task task, DateTime notificationAt) async {
-    final notificationId = task.id.hashCode.abs();
-    final body = 'task_reminder_body'.tr() + (task.note != null && task.note!.isNotEmpty ? '\n${task.note}' : '');
-    
-    await NotificationService.instance.schedule(
-      id: notificationId,
-      title: task.title,
-      body: body,
-      scheduledDate: notificationAt, // Fire 30 minutes before task time
-    );
+  Future<void> scheduleReminders(Task task) async {
+    final baseId = task.id.hashCode.abs();
+    final now = DateTime.now();
+
+    // 1. Schedule 30 min reminder
+    final time30 = task.scheduledAt.subtract(const Duration(minutes: 30));
+    if (time30.isAfter(now)) {
+      final body30 = 'task_reminder_body'.tr() + (task.note != null && task.note!.isNotEmpty ? '\n${task.note}' : '');
+      await NotificationService.instance.schedule(
+        id: baseId,
+        title: task.title,
+        body: body30,
+        scheduledDate: time30,
+      );
+    }
+
+    // 2. Schedule 10 min reminder
+    final time10 = task.scheduledAt.subtract(const Duration(minutes: 10));
+    if (time10.isAfter(now)) {
+      final body10 = 'task_reminder_body_10'.tr() + (task.note != null && task.note!.isNotEmpty ? '\n${task.note}' : '');
+      await NotificationService.instance.schedule(
+        id: baseId + 1, // Offset ID for second notification
+        title: task.title,
+        body: body10,
+        scheduledDate: time10,
+      );
+    }
   }
 
-  Future<void> cancelNotification(int notificationId) async {
-    await NotificationService.instance.cancel(notificationId);
+  Future<void> cancelReminders(int baseNotificationId) async {
+    await NotificationService.instance.cancel(baseNotificationId);      // 30 min
+    await NotificationService.instance.cancel(baseNotificationId + 1);  // 10 min
   }
 
-  Future<void> rescheduleTask(Task task, DateTime newScheduledAt, DateTime newNotificationAt) async {
+  Future<void> rescheduleTask(Task task, DateTime newScheduledAt) async {
     final box = HiveBoxes.tasksBox;
-    // Cancel old notification
-    await NotificationService.instance.cancel(task.notificationId);
+    // Cancel old notifications
+    await cancelReminders(task.notificationId);
+    
     // Update task with new scheduled time
     final updatedTask = task.copyWith(scheduledAt: newScheduledAt);
     await box.put(task.id, updatedTask);
-    // Schedule new notification (30 minutes before new task time)
-    await scheduleNotification(updatedTask, newNotificationAt);
+    
+    // Schedule new reminders
+    await scheduleReminders(updatedTask);
   }
 }

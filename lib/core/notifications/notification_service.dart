@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
@@ -20,7 +22,7 @@ class NotificationService {
   Future<void> init() async {
     // Initialize Android
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('@mipmap/launcher_icon');
+        AndroidInitializationSettings('@drawable/ic_notification');
 
     // Initialize iOS
     const DarwinInitializationSettings iosInitializationSettings =
@@ -55,12 +57,15 @@ class NotificationService {
         _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
 
-    await androidImplementation?.requestNotificationsPermission();
-    await androidImplementation?.requestExactAlarmsPermission();
+    final notifGranted = await androidImplementation?.requestNotificationsPermission();
+    final alarmGranted = await androidImplementation?.requestExactAlarmsPermission();
+    debugPrint('[NotificationService] notifPermission=$notifGranted, alarmPermission=$alarmGranted');
 
-    // Initialize timezone with UTC as default
-    _localTimezone = tz.getLocation('UTC');
+    // Detect and use device local timezone
+    final timezoneInfo = await FlutterTimezone.getLocalTimezone();
+    _localTimezone = tz.getLocation(timezoneInfo.identifier);
     tz.setLocalLocation(_localTimezone);
+    debugPrint('[NotificationService] Timezone set to: ${timezoneInfo.identifier}');
   }
 
   Future<int> schedule({
@@ -69,8 +74,25 @@ class NotificationService {
     required String body,
     required DateTime scheduledDate,
   }) async {
-    final tz.TZDateTime tzScheduledDate =
-        tz.TZDateTime.from(scheduledDate, _localTimezone);
+    final tz.TZDateTime tzScheduledDate = tz.TZDateTime(
+      _localTimezone,
+      scheduledDate.year,
+      scheduledDate.month,
+      scheduledDate.day,
+      scheduledDate.hour,
+      scheduledDate.minute,
+      scheduledDate.second,
+    );
+
+    final now = tz.TZDateTime.now(_localTimezone);
+    debugPrint('[NotificationService] Scheduling id=$id title="$title"');
+    debugPrint('[NotificationService] Now:       $now');
+    debugPrint('[NotificationService] Scheduled: $tzScheduledDate');
+
+    if (tzScheduledDate.isBefore(now)) {
+      debugPrint('[NotificationService] ⚠️ Scheduled time is in the past! Skipping.');
+      return id;
+    }
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       id,
@@ -82,10 +104,12 @@ class NotificationService {
           'reminders_channel',
           'Reminders',
           channelDescription: 'Notification channel for reminders',
-          importance: Importance.high,
-          priority: Priority.high,
+          importance: Importance.max,
+          priority: Priority.max,
           enableVibration: true,
           playSound: true,
+          icon: '@drawable/ic_notification',
+          largeIcon: DrawableResourceAndroidBitmap('@drawable/ic_notification_large'),
         ),
         iOS: DarwinNotificationDetails(
           sound: 'default',
@@ -94,15 +118,17 @@ class NotificationService {
           presentSound: true,
         ),
       ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
 
+    debugPrint('[NotificationService] ✅ Notification scheduled successfully id=$id');
     return id;
   }
 
   Future<void> cancel(int id) async {
     await _flutterLocalNotificationsPlugin.cancel(id);
+    debugPrint('[NotificationService] Cancelled notification id=$id');
   }
 }

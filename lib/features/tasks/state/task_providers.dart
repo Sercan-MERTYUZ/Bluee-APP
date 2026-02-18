@@ -21,9 +21,6 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     required String? note,
     required DateTime scheduledAt,
   }) async {
-    // Calculate notification time: 30 minutes before task time
-    final notificationAt = scheduledAt.subtract(const Duration(minutes: 30));
-
     // Validate: scheduledAt must be in the future (allow 1 minute buffer for "just now")
     if (scheduledAt.isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
       return 'invalid_time'; // localization key
@@ -43,14 +40,11 @@ class TaskNotifier extends StateNotifier<List<Task>> {
 
     await repository.addTask(task);
     
-    // Schedule notification only if notification time is in the future
-    if (notificationAt.isAfter(DateTime.now())) {
-      try {
-        await repository.scheduleNotification(task, notificationAt);
-      } catch (e) {
-        debugPrint('Notification scheduling failed: $e');
-        // Continue execution even if notification fails
-      }
+    // Schedule notifications (Repository handles logic for 30m and 10m)
+    try {
+      await repository.scheduleReminders(task);
+    } catch (e) {
+      debugPrint('Notification scheduling failed: $e');
     }
 
     state = [...state, task];
@@ -65,7 +59,7 @@ class TaskNotifier extends StateNotifier<List<Task>> {
 
     if (done) {
       try {
-        await repository.cancelNotification(task.notificationId);
+        await repository.cancelReminders(task.notificationId);
       } catch (e) {
         debugPrint('Notification cancellation failed: $e');
       }
@@ -78,62 +72,26 @@ class TaskNotifier extends StateNotifier<List<Task>> {
   }
 
   Future<void> deleteTask(Task task) async {
-    try {
-      await repository.deleteTask(task.id);
-    } catch (e) {
-      // Even if deleting fails (e.g. notification cancel error inside), we should update state?
-      // Repository.deleteTask handles notification cancel internally. 
-      // If that throws, we might miss Hive delete.
-      // Better to rely on repository ensuring Hive delete happens.
-      // Let's assume repository.deleteTask is safe-ish or we catch here.
-      debugPrint('Delete task failed: $e');
-      // If hive delete failed, we probably shouldn't remove from state, OR we should force sync.
-      // For now, let's rethrow or handle?
-      // User complaint is "ui freeze", so let's allow state update if relevant.
-    }
-    // But repository.deleteTask includes Hive delete. If that fails, data is still there.
-    // Let's modify repository instead for delete safety.
-    
-    // Actually, looking at repo code:
-    // await NotificationService.instance.cancel(task.notificationId);
-    // await box.delete(taskId);
-    // Be safer:
     await repository.deleteTaskSafe(task);
     state = state.where((t) => t.id != task.id).toList();
   }
 
   Future<String?> rescheduleTask(Task task, DateTime newScheduledAt) async {
-    // Calculate notification time: 30 minutes before new task time
-    final newNotificationAt = newScheduledAt.subtract(const Duration(minutes: 30));
-
     // Validate: newScheduledAt must be in the future (allow 1 minute buffer)
     if (newScheduledAt.isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
       return 'invalid_time';
     }
 
-    // We handle repository update separately to ensure state updates even if notification fails
-    // await repository.rescheduleTask(task, newScheduledAt, newNotificationAt); BUT custom impl below:
-    
-    // 1. Cancel old notification (ignore error)
+    // Delegate rescheduling to repository (handles cancel + update + reschedule both reminders)
     try {
-      await repository.cancelNotification(task.notificationId);
+      await repository.rescheduleTask(task, newScheduledAt);
     } catch (e) {
-      debugPrint('Cancel notification failed: $e');
-    }
-
-    // 2. Update task in DB
-    final updatedTask = task.copyWith(scheduledAt: newScheduledAt);
-    await repository.updateTask(updatedTask);
-
-    // 3. Schedule new notification (ignore error) if time is valid
-    if (newNotificationAt.isAfter(DateTime.now())) {
-      try {
-        await repository.scheduleNotification(updatedTask, newNotificationAt);
-      } catch (e) {
-        debugPrint('Schedule notification failed: $e');
-      }
+      debugPrint('Reschedule task failed: $e');
+      // Even if repo fails, we might want to update local state if the DB write succeeded?
+      // But repo transaction is monolithic enough.
     }
     
+    // Update local state
     state = [
       for (final t in state)
         if (t.id == task.id) t.copyWith(scheduledAt: newScheduledAt) else t,
