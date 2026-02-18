@@ -8,7 +8,8 @@ Bluee is a modern, efficient, and user-friendly reminder application built with 
 - **Search Tasks**: Quickly find tasks by title or note.
 - **Note Taking**: Create notes with rich details including person/topic tags.
 - **Advanced Filtering**: Filter notes by person (using checkboxes) and date range.
-- **Local Notifications**: Scheduled notifications to remind you of your tasks on time.
+- **Dual Local Notifications**: Receive reminders **30 minutes** and **10 minutes** before your task.
+- **Custom Notification Icons**: Notifications feature the app logo and a custom status bar icon.
 - **Offline Storage**: Uses **Hive** for fast and secure local data storage.
 - **State Management**: Built with **Riverpod** for a robust and scalable architecture.
 - **Multi-language Support**: Fully localized in **English** and **Turkish** using `easy_localization`.
@@ -100,8 +101,8 @@ flutter build apk --release
 The APK will be generated at: `build/app/outputs/flutter-apk/app-release.apk`
 
 Pre-built APKs are available in the `APKs/` directory:
-- `APKs/Bluee.apk` - Initial version
-- `APKs/Bluee2.apk` - Version with Notes feature
+- `APKs/Bluee.apk` - **Latest version** (Dual notifications, custom icons, timezone fix)
+- `APKs/Bluee2.apk` - Old version with Notes feature
 
 ## 🌍 Localization
 
@@ -125,7 +126,8 @@ Bluee, **Flutter** ile geliştirilmiş modern, etkili ve kullanıcı dostu bir h
 - **Görev Arama**: Başlık veya nota göre görevleri hızlıca bulun.
 - **Not Alma**: Kişi/konu etiketleri ile detaylı notlar oluşturun.
 - **Gelişmiş Filtreleme**: Notları kişiye (checkbox ile) ve tarih aralığına göre filtreleyin.
-- **Yerel Bildirimler**: Görevlerinizi zamanında hatırlatmak için zamanlanmış bildirimler.
+- **Çift Bildirim Sistemi**: Görevinizden **30 dakika** ve **10 dakika** önce hatırlatma alın.
+- **Özel Bildirim İkonları**: Uygulama logosu ve özel durum çubuğu ikonu ile şık bildirimler.
 - **Çevrimdışı Depolama**: Hızlı ve güvenli yerel veri depolaması için **Hive** kullanır.
 - **Durum Yönetimi (State Management)**: Sağlam ve ölçeklenebilir bir mimari için **Riverpod** ile geliştirilmiştir.
 - **Çoklu Dil Desteği**: `easy_localization` kullanılarak **İngilizce** ve **Türkçe** dillerini tam destekler.
